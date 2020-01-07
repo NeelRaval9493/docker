@@ -1,0 +1,59 @@
+sudo apt-get install \
+apt-transport-https \
+ca-certificates \
+curl \
+software-properties-common
+
+
+curl -fsSL http://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo apt-key fingerprint 0EBFCD88
+
+
+sudo add-apt-repository \
+"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) \
+stable"
+
+
+sudo apt-get install docker-ce
+
+
+docker image pull nginx:latest
+
+docker images
+
+docker container run -itd --name web-server-nginx -p 8080:80 nginx:latest
+
+
+
+**Docker Ecosystem**
+
+**Docker Architecture**
+
+Docker Client >>>>>> Docker HOST >>>>>> Docker Registry
+
+
+-Docker Client
+
+CLI	docker run
+	docker pull
+	
+API	client.container.run
+	client.container.list
+
+-Docker Host
+
+	Docker Daemon
+	Docker file
+	Docker images
+	
+
+-Docker Registry
+
+
+***Docker format***
+
+Docker files >>>> Docker Image >>>> Containers
+Build			Ship		RUN	
+	

@@ -1,0 +1,142 @@
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/76620ada594138960d20262fee1afdfebbb274a0c1a6744186c9a9e9328f27f33bee5afdc/diff:/var/lib/docker/overlay2/7d29cb
+                "MergedDir": "/var/lib/docker/overlay2/a543dafb45f9813c4b2731a6181
+                "UpperDir": "/var/lib/docker/overlay2/a543dafb45f9813c4b2731a61814
+                "WorkDir": "/var/lib/docker/overlay2/a543dafb45f9813c4b2731a618148
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:ea69392465ad72ace1216ca2f49a372c7d6f10ec031ab53a94a17699c9
+                "sha256:cb81b9d8a6c94953649603953d798fe2f2149eedad9c4108377d33d52b
+                "sha256:90109bbe5b7686d39d031b5b0e51d4dac69c5cb112f96ed785f56cc011
+                "sha256:9acfe225486b3167970823d286270ce8645c4a565c3a7a19e66bd5c585
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
+root@neel-vm:~/.docker# docker image inspect --format "{{json.Config}}" ubuntu:16.
+
+Template parsing error: template: :1:2: executing "" at <json>: wrong number of ar
+root@neel-vm:~/.docker# docker image inspect --format "{{json .Config}}" ubuntu:16
+{"Hostname":"","Domainname":"","User":"","AttachStdin":false,"AttachStdout":false,/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"],"Cmd":["/bin/bash"],"Are5b95afd77","Volumes":null,"WorkingDir":"","Entrypoint":null,"OnBuild":null,"Label
+root@neel-vm:~/.docker# ls
+config.json  inspect_report_ubuntu.txt
+root@neel-vm:~/.docker# docker image inspect --format "{{json .Config}}" ubuntu:16
+root@neel-vm:~/.docker# ls
+config.json  inspect_report_ubuntu.txt
+root@neel-vm:~/.docker# cat inspect_report_ubuntu.txt
+{"Hostname":"","Domainname":"","User":"","AttachStdin":false,"AttachStdout":false,/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"],"Cmd":["/bin/bash"],"Are5b95afd77","Volumes":null,"WorkingDir":"","Entrypoint":null,"OnBuild":null,"Label
+root@neel-vm:~/.docker#
+root@neel-vm:~/.docker#
+root@neel-vm:~/.docker# clear
+root@neel-vm:~/.docker# cd
+root@neel-vm:~# docker image history ubuntu
+Error response from daemon: No such image: ubuntu:latest
+root@neel-vm:~# docker images
+REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE
+img_apache             latest              ce41c8bb8edd        27 hours ago        150MB
+img_expose             latest              10dfb5690f6e        27 hours ago        178MB
+img_run-env            latest              e4bfe2c8276a        4 days ago          138MB
+img_from               latest              d044b08fd5cb        4 days ago          147MB
+nginx                  latest              5a9061639d0a        5 days ago          126MB
+ubuntu                 16.04               657d80a6401d        4 weeks ago         121MB
+hello-world            latest              fce289e99eb9        9 months ago        1.84kB
+ubuntu                 12.04               5b117edd0b76        2 years ago         104MB
+neelraval9493/ubuntu   first               5b117edd0b76        2 years ago         104MB
+root@neel-vm:~# docker image history ubuntu:16.04
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+657d80a6401d        4 weeks ago         /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B
+<missing>           4 weeks ago         /bin/sh -c mkdir -p /run/systemd && echo 'do…   7B
+<missing>           4 weeks ago         /bin/sh -c set -xe   && echo '#!/bin/sh' > /…   745B
+<missing>           4 weeks ago         /bin/sh -c rm -rf /var/lib/apt/lists/*          0B
+<missing>           4 weeks ago         /bin/sh -c #(nop) ADD file:a5b5bea2fa5358461…   121MB
+root@neel-vm:~# docker image history ubuntu:16.04
+IMAGE               CREATED             CREATED BY
+657d80a6401d        4 weeks ago         /bin/sh -c #(nop)  CMD ["/bin/bash"]
+<missing>           4 weeks ago         /bin/sh -c mkdir -p /run/systemd && echo '
+<missing>           4 weeks ago         /bin/sh -c set -xe   && echo '#!/bin/sh' >
+<missing>           4 weeks ago         /bin/sh -c rm -rf /var/lib/apt/lists/*
+<missing>           4 weeks ago         /bin/sh -c #(nop) ADD file:a5b5bea2fa53584
+root@neel-vm:~# uname -a
+Linux neel-vm 4.13.0-36-generic #40~16.04.1-Ubuntu SMP Fri Feb 16 23:25:58 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+root@neel-vm:~# ls -l
+total 0
+root@neel-vm:~# cd /home/
+root@neel-vm:/home# ls
+neel
+root@neel-vm:/home# cd neel/
+root@neel-vm:/home/neel# ls
+CC_Docker  Documents  examples.desktop  Pictures  Templates
+Desktop    Downloads  Music             Public    Videos
+root@neel-vm:/home/neel# cd CC_Docker/
+root@neel-vm:/home/neel/CC_Docker# ls -a
+.  ..  S2  S6
+root@neel-vm:/home/neel/CC_Docker# ls -l
+total 8
+drwxr-xr-x 6 root root 4096 Dec 19  2018 S2
+drwxr-xr-x 2 root root 4096 Mar 22  2019 S6
+root@neel-vm:/home/neel/CC_Docker# cd
+root@neel-vm:~# docker image
+
+Usage:  docker image COMMAND
+
+Manage images
+
+Commands:
+  build       Build an image from a Dockerfile
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Display detailed information on one or more images
+  load        Load an image from a tar archive or STDIN
+  ls          List images
+  prune       Remove unused images
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rm          Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
+Run 'docker image COMMAND --help' for more information on a command.
+root@neel-vm:~# docker images
+REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE
+img_apache             latest              ce41c8bb8edd        27 hours ago        150MB
+img_expose             latest              10dfb5690f6e        27 hours ago        178MB
+img_run-env            latest              e4bfe2c8276a        4 days ago          138MB
+img_from               latest              d044b08fd5cb        4 days ago          147MB
+nginx                  latest              5a9061639d0a        5 days ago          126MB
+ubuntu                 16.04               657d80a6401d        4 weeks ago         121MB
+hello-world            latest              fce289e99eb9        9 months ago        1.84kB
+ubuntu                 12.04               5b117edd0b76        2 years ago         104MB
+neelraval9493/ubuntu   first               5b117edd0b76        2 years ago         104MB
+root@neel-vm:~# docker container ls
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+8923c56d7339        img_apache          "/usr/sbin/apache2 -…"   27 hours ago        Up 27 hours         0.0.0.0:8082->80/tcp   cont_apache
+7d70ff86bb5f        img_expose          "nginx -g 'daemon of…"   27 hours ago        Up 27 hours         0.0.0.0:8081->80/tcp   cont_expose
+72fa7547abe0        img_run-env         "bash"                   4 days ago          Up 4 days                                  count_run-env
+7f77783e089f        nginx:latest        "nginx -g 'daemon of…"   4 days ago          Up 4 days           0.0.0.0:8080->80/tcp   web-server-nginx
+root@neel-vm:~# docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+8923c56d7339        img_apache          "/usr/sbin/apache2 -…"   27 hours ago        Up 27 hours         0.0.0.0:8082->80/tcp   cont_apache
+7d70ff86bb5f        img_expose          "nginx -g 'daemon of…"   27 hours ago        Up 27 hours         0.0.0.0:8081->80/tcp   cont_expose
+72fa7547abe0        img_run-env         "bash"                   4 days ago          Up 4 days                                  count_run-env
+7f77783e089f        nginx:latest        "nginx -g 'daemon of…"   4 days ago          Up 4 days           0.0.0.0:8080->80/tcp   web-server-nginx
+root@neel-vm:~# docker container create -it --name cc-busybox-A busybox:latest
+Unable to find image 'busybox:latest' locally
+latest: Pulling from library/busybox
+7c9d20b9b6cd: Pull complete
+Digest: sha256:fe301db49df08c384001ed752dff6d52b4305a73a7f608f21528048e8a08b51e
+Status: Downloaded newer image for busybox:latest
+b0200cb0ddafe130458749ce081b034a33b6f992cd4be87623a633ba72967cce
+root@neel-vm:~# docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+8923c56d7339        img_apache          "/usr/sbin/apache2 -…"   27 hours ago        Up 27 hours         0.0.0.0:8082->80/tcp   cont_apache
+7d70ff86bb5f        img_expose          "nginx -g 'daemon of…"   27 hours ago        Up 27 hours         0.0.0.0:8081->80/tcp   cont_expose
+72fa7547abe0        img_run-env         "bash"                   4 days ago          Up 4 days                                  count_run-env
+7f77783e089f        nginx:latest        "nginx -g 'daemon of…"   4 days ago          Up 4 days           0.0.0.0:8080->80/tcp   web-server-nginx
+root@neel-vm:~#
